@@ -1,6 +1,7 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const User = require('../models/user.model');
+const Wallet = require('../models/wallet.model')
 
 
 exports.register = async (data) =>{
@@ -16,6 +17,7 @@ exports.register = async (data) =>{
         email,
         password: hashedPassword
     })
+    await Wallet.create({ userId: user.id });
     return user;
 
 }
