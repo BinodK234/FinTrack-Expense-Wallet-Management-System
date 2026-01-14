@@ -46,4 +46,25 @@ exports.getTransactions = async (userId) => {
     where: { walletId: wallet.id },
     order: [["createdAt", "DESC"]],
   });
+
+
 };
+
+  exports.getSummary = async (userId) => {
+    
+    const wallet = await Wallet.findOne({ where : { userId }})
+
+    const transactions = await Transaction.findAll({ where: { walletId: wallet.id } });
+
+    let totalCredit = 0;
+    let totalDebit = 0;
+    transactions.forEach(trx => {
+      if(trx.type === 'CREDIT') totalCredit += Number(trx.amount);
+      else totalDebit += Number(trx.amount)
+    })
+    return {
+      balance: wallet.balance,
+      totalCredit,
+      totalDebit
+    }
+  }

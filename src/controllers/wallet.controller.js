@@ -25,3 +25,18 @@ exports.getTransactions = async (req, res) => {
     res.status(400).json({ message: err.message });
   }
 };
+
+exports.getSummary = async (req, res) => {
+    res.set({
+    'Cache-Control': 'no-store, no-cache, must-revalidate, private',
+    'Pragma': 'no-cache',
+    'Expires': '0'
+  });
+  try {
+    const data = await walletService.getSummary(req.user.id)
+    res.json(data)
+  }
+  catch (err) {
+    res.status(400).json({ message: err.message });
+  }
+}
