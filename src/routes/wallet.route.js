@@ -1,5 +1,4 @@
-<<<<<<< Updated upstream
-=======
+
 const express = require('express');
 const router = express.Router();
 const walletController = require('../controllers/wallet.controller');
@@ -127,4 +126,3 @@ router.get('/transactions', auth, walletController.getTransactions)
 router.get('/summary', auth, walletController.getSummary)
 
 module.exports = router
->>>>>>> Stashed changes

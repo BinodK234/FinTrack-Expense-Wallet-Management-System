@@ -22,7 +22,7 @@ const PORT = process.env.PORT || 5000;
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs))
 sequelize.authenticate().then(async () => {
   console.log('MySQL connected');
-  await sequelize.sync({alter: true})
+  await sequelize.sync({alter: false})
   console.log('Model synced');
   app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
