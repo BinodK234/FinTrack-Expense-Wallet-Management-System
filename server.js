@@ -4,6 +4,7 @@ const swaggerUi = require('swagger-ui-express');
 const swaggerDocs = require('./src/config/swagger')
 require("dotenv").config();
 const PORT = process.env.PORT || 5000;
+const cors = require('cors');
 
 // sequelize
 //   .authenticate()
@@ -20,6 +21,7 @@ const PORT = process.env.PORT || 5000;
 // checking sql connection and model synch
 
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs))
+app.use(cors());
 sequelize.authenticate().then(async () => {
   console.log('MySQL connected');
   await sequelize.sync({alter: false})
